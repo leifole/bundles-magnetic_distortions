@@ -1,0 +1,20 @@
+<package>
+  <description brief="Bundle for the Magnetic Distortion Table Christensen PH.D. experiment">
+  
+  </description>
+  <author>Leif Christensen/leif.christensen@gmx.de</author>
+  <license></license>
+  <url>http://</url>
+  <logo>http://</logo>
+
+  <depend package="bundles/rock" />
+  <!--
+   To add any dependencies use the depend tag
+  <depend package="dummy-dependency-0" />
+	...
+  <depend package="dummy-dependency-n-1" />
+  <depend package="dummy-dependency-n" />
+  -->
+  <depend package="drivers/orogen/mc_maxon_epos" />
+  <depend package="drivers/orogen/servo_dynamixel" />
+</package>
