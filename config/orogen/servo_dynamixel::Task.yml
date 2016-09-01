@@ -1,0 +1,42 @@
+--- name:default
+# the baudrate for the communication with the servos
+baudrate: 57600
+# If true, input command will be capped to respect the joint limits. If false, exception will be thrown if a joint limit is violated.
+cap_at_limits: 0
+# the system device name for the servo controller command
+device: '/dev/ttyUSB0'
+# set limits of the servo. Scale and offset values from servo_config will be used to convert to ticks.
+# Min Position corresponds to CW Angle Limit, Max Position to CCW Angle Limit
+# Max Speed will be the initial moving speed of servo, max effort will be the torque limit
+# If a value is not set, default will be used (0...1023 as joint limits in ticks, max moving speed (1023), max torque (1023))
+# Min speed and min effort members are not used
+joint_limits:
+  names: []
+  elements: []
+# optional configuration for the rigid_body_states
+# this module will generate on the
+joint_transform:
+  names: []
+  elements: []
+# Always keep torque enabled (even after stopping the component)
+keep_torque_enabled: 0
+# set a retry count for sending packages to the device
+package_retry_count: 0
+# configuration of the servo chain
+# adds the mapping of name to servo id, and also sets the
+# dynamixel specific configuration values
+servo_config: 
+  - name: servo_0 
+    id: 1
+    cwComplianceMargin: 1
+    ccwComplianceMargin: 1
+    cwComplianceSlope: 32
+    ccwComplianceSlope: 32
+    punch: 32
+    positionScale: 195.383 # 1023/(300/180*3.141) 
+    positionOffset: 0
+    positionRange: 1023 
+    speedScale: 139.58 # 1023/(70/60*3.141*2) 
+    effortScale: 361.48 # 1023/2.83 
+# read/write timeout of dynamixel in ms
+timeout: 1000
