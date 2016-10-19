@@ -8,9 +8,14 @@ include Orocos
 Bundles.initialize
 Bundles.conf.load_dir(Bundles.find_dir('config'))
 
-Orocos.run 'servo_dynamixel::Task' => 'servo', 'mc_maxon_epos::Task' => 'epos', :output => nil do 
+Orocos.run 'servo_dynamixel::Task' => 'servo', 
+           'mc_maxon_epos::Task' => 'epos',
+           'multimeter_pt3315::Task' => 'pt',
+           :output => nil do 
+
     servo = Orocos.get 'servo'
     epos = Orocos.get 'epos'
+    pt = Orocos.get 'pt'
 
 
     Orocos.conf.apply(servo)
@@ -36,13 +41,18 @@ Orocos.run 'servo_dynamixel::Task' => 'servo', 'mc_maxon_epos::Task' => 'epos', 
     #servo.servo_config.push(sc)
 
     #binding.pry
+    
+    pt.device = ""
+
 
     epos.position_list = [0.02,0.0]
     epos.ticks2meter = 1.85e-8
 
+    pt.configure
     servo.configure
     epos.configure
 
+    pt.start
     servo.start
     epos.start
 
